@@ -1,0 +1,5 @@
+#!/bin/bash
+killall teams
+teams --remote-debugging-port=12345
+sleep 5
+node index.js
