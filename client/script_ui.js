@@ -44,11 +44,13 @@ class ScriptUI {
                                 </svg></ng-include>
                         </div>
                         <h1 class="app-font-family-base ts-modal-dialog-title" ng-if="!!dialogTitle"
-                            ng-hide="hideDialogTitle" ng-bind="dialogTitle" id="modalDialog-title">Settings</h1>
+                            ng-hide="hideDialogTitle" ng-bind="dialogTitle" id="modalDialog-title">Loaded Scripts</h1>
                     </div>
                     <div class="ts-modal-dialog-content">
                         <div class="ts-modal-dialog-content-container" ng-transclude="">
-                            <h2>Scripts</h2>
+                            <ul>
+                                ${window.teamsUserScripts.loadedScripts.map(s => `<li>${s}</li>`).join("")}
+                            </ul>
                         </div>
                     </div>
                 </div>

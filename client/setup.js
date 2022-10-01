@@ -14,3 +14,5 @@ spacer.parentNode.insertBefore(
     spacer.nextSibling
 );
 document.getElementById("script-button").onclick = () => (new ScriptUI()).activate();
+
+window.teamsUserScripts = { loadedScripts: [] }

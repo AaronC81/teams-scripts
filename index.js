@@ -52,6 +52,14 @@ async function main() {
     const files = ["client/script_utils.js", "client/script_ui.js", "client/setup.js"];
     files.forEach(file =>
         Runtime.evaluate({expression: fs.readFileSync(file).toString()}));
+
+    // After these, inject user-scripts
+    const scriptsDir = `${__dirname}/scripts`;
+    fs.readdirSync(scriptsDir).forEach(userScript => {
+        userScript = userScript.replace(/\\/, '/');
+        Runtime.evaluate({expression: `window.teamsUserScripts.loadedScripts.push("${userScript}")`});
+        Runtime.evaluate({expression: fs.readFileSync(`${scriptsDir}/${userScript}`).toString()});
+    });
 }
 
 main();
