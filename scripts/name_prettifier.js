@@ -1,3 +1,9 @@
+/*
+Rearranges ETAS formatted names so that they look nicer.
+
+"Christiansen Aaron (ETAS-DAP/XPC-UK)" becomes "Aaron Christiansen (ETAS-DAP/XPC-UK)", with the
+organisational unit tag in grey-italics.
+*/
 
 const ETAS_NAME_REGEX = /((?:[^ ]+ )+)(\([^\)]+\))/;
 
