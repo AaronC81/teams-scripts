@@ -26,6 +26,17 @@ async function getWindowTitle(cdpClient) {
     }
 }
 
+async function waitForLaunch(cdpClient) {
+    // Wait for Teams to fully launch
+    while (true) {
+        const windowTitle = await getWindowTitle(cdpClient);
+        if (windowTitle && windowTitle.endsWith("| Microsoft Teams")) {
+            break;
+        }
+        await delay(500);
+    }
+}
+
 async function main() {
     // Set up our CDP connection
     let client = await CDP({
@@ -39,14 +50,14 @@ async function main() {
     await Runtime.enable();
     await DOM.enable();
 
-    // Wait for Teams to fully launch
-    while (true) {
-        const windowTitle = await getWindowTitle(client);
-        if (windowTitle && windowTitle.endsWith("| Microsoft Teams")) {
-            break;
-        }
-        await delay(500);
-    }
+    // Wait for first launch
+    await waitForLaunch(client);
+
+    // Ask Teams to relaunch with more debugging information enabled, which lets us do more!
+    // This shouldn't break our debugger connection
+    Runtime.evaluate({expression: "angular.reloadWithDebugInfo()"});
+    await delay(1000);
+    await waitForLaunch(client);
 
     // Start injecting scripts
     const files = ["client/script_utils.js", "client/script_ui.js", "client/setup.js"];
