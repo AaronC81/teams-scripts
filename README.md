@@ -6,14 +6,12 @@ behaviour of Teams as much as you like!
 
 ## What does it do?
 
-When Teams launches, it'll run any of the scripts inside this repository's
-`scripts` directory.
+When this connects to Teams, it'll run any of the scripts inside this
+repository's `scripts` directory.
 
 Loaded scripts are shown by clicking "Scripts" in the sidebar:
 
 ![The "Scripts" button in the Teams sidebar](img/button.png)
-
-But this shows it's possible to easily execute arbitrary scripts within Teams.
 
 ## How does it work?
 
